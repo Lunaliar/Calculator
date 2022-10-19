@@ -22,11 +22,7 @@ function App() {
 		"=",
 	];
 	const [display, setDisplay] = useState("");
-	const [result, setResult] = useState(false);
-
 	const handleClick = (e) => {
-		console.log(`display is: ${display}`);
-		console.log(display.charAt(display.length - 1));
 		if (display === "Error") {
 			setDisplay("");
 		} else {
@@ -39,7 +35,6 @@ function App() {
 				case "+":
 				case "*":
 				case "-": {
-					console.log(display.charAt(display.length - 1));
 					if (
 						display.charAt(display.length - 1) === "" ||
 						display.charAt(display.length - 1) === "*" ||
@@ -47,7 +42,7 @@ function App() {
 						display.charAt(display.length - 1) === "+" ||
 						display.charAt(display.length - 1) === "/"
 					) {
-						console.log("incorrect");
+						break;
 					} else {
 						setDisplay((currDisplay) => (currDisplay += e.target.innerText));
 					}
@@ -72,12 +67,8 @@ function App() {
 					break;
 				}
 				case ".": {
-					if (display === "") {
-						setDisplay("0");
-					}
-					if (display.charAt(display.length - 1) === ".") {
-						break;
-					}
+					if (display === "") setDisplay("0");
+					if (display.charAt(display.length - 1) === ".") break;
 				}
 				default: {
 					setDisplay((currDisplay) => (currDisplay += e.target.innerText));
@@ -111,5 +102,4 @@ function App() {
 		</div>
 	);
 }
-
 export default App;
