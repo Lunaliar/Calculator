@@ -57,6 +57,8 @@ function App() {
 						break;
 					} else {
 						try {
+							//! eval is used due to the limited nature of input, for simplicity.
+							//! If app was more complex eval would not be used here.
 							let evalDisplay = String(eval(display));
 							setDisplay(evalDisplay);
 						} catch (e) {
@@ -68,11 +70,13 @@ function App() {
 				}
 				case ".": {
 					if (display === "") setDisplay("0");
-					if (display.charAt(display.length - 1) === ".") break;
+					if (display.charAt(display.length - 1) === ".") {
+						break;
+					}
+					break;
 				}
 				default: {
 					setDisplay((currDisplay) => (currDisplay += e.target.innerText));
-					break;
 				}
 			}
 		}
