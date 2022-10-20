@@ -79,25 +79,28 @@ function App() {
 	};
 
 	return (
-		<div className="container">
-			<div
-				className="display"
-				placeholder="."
-			>
-				{display}
-			</div>
-			<div className="buttons">
-				{buttonSymbols.map((b) => {
-					return (
-						<div
-							onClick={(e) => handleClick(e)}
-							className={`button ${b} ${b === "=" && "equals"}`}
-							key={b}
-						>
-							{b}
-						</div>
-					);
-				})}
+		<div className="app">
+			<h1>A simple calculator</h1>
+			<div className="container">
+				<div
+					className="display"
+					placeholder="."
+				>
+					{display}
+				</div>
+				<div className="buttons">
+					{buttonSymbols.map((b) => {
+						return (
+							<div
+								onClick={(e) => handleClick(e)}
+								className={`button ${b} ${b === "=" && "equals"}`}
+								key={b}
+							>
+								{b}
+							</div>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);
