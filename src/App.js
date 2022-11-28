@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+
+const buttonSymbols = [
+	"CE",
+	"x²",
+	"¹/x",
+	"←",
+	"/",
+	"7",
+	"8",
+	"9",
+	"*",
+	"4",
+	"5",
+	"6",
+	"-",
+	"1",
+	"2",
+	"3",
+	"+",
+	".",
+	"0",
+	"=",
+];
+
 function App() {
-	const buttonSymbols = [
-		"Clear",
-		"←",
-		"/",
-		"7",
-		"8",
-		"9",
-		"*",
-		"4",
-		"5",
-		"6",
-		"-",
-		"1",
-		"2",
-		"3",
-		"+",
-		".",
-		"0",
-		"=",
-	];
 	const [display, setDisplay] = useState("");
+	const[calculations, setCalculations] = useState("")
+	const[input, setInput] = useState("")
+	useEffect(()=>{
+		setCalculations(`35 + 43`)
+		setInput(`15`)
+	},[])
 	const handleClick = (e) => {
 		if (display === "Error") {
 			setDisplay("");
@@ -89,8 +99,10 @@ function App() {
 				<div
 					className="display"
 					placeholder="."
-				>
-					{display}
+				><div>{calculations}</div>
+					<div>
+						{input}
+						</div>
 				</div>
 				<div className="buttons">
 					{buttonSymbols.map((b) => {
