@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import calculateString from "calculate-string";
+import React, {useState} from "react";
 import "./style.css";
 
 const buttonSymbols = [
 	"CE",
+	"←",
 	"x²",
 	"¹/x",
-	"←",
 	"/",
 	"7",
 	"8",
@@ -23,93 +24,107 @@ const buttonSymbols = [
 	"0",
 	"=",
 ];
-
+const operators = ["/", "+", "-", "*", "CE", "x²", "¹/x", "←", "="];
+const basicOperators = operators.splice(0, 4);
 function App() {
-	const [display, setDisplay] = useState("");
-	const[calculations, setCalculations] = useState("")
-	const[input, setInput] = useState("")
-	useEffect(()=>{
-		setCalculations(`35 + 43`)
-		setInput(`15`)
-	},[])
-	const handleClick = (e) => {
-		if (display === "Error") {
-			setDisplay("");
-		} else {
-			switch (e.target.innerText) {
-				case "←": {
-					setDisplay((display) => display.slice(0, -1));
-					break;
-				}
-				case "/":
-				case "+":
-				case "*":
-				case "-": {
-					if (
-						display.charAt(display.length - 1) === "" ||
-						display.charAt(display.length - 1) === "*" ||
-						display.charAt(display.length - 1) === "-" ||
-						display.charAt(display.length - 1) === "+" ||
-						display.charAt(display.length - 1) === "/"
-					) {
-						break;
-					} else {
-						setDisplay((currDisplay) => (currDisplay += e.target.innerText));
-					}
-					break;
-				}
-				case "Clear": {
-					setDisplay("");
-					break;
-				}
-				case "=": {
-					if (display === "") {
-						break;
-					} else {
-						try {
-							//! eval is used due to the limited nature of input, for simplicity.
-							//! If app was more complex eval would not be used here.
-							let evalDisplay = String(eval(display));
-							setDisplay(evalDisplay);
-						} catch (e) {
-							setDisplay("Error");
-							console.log(e);
-						}
-					}
-					break;
-				}
-				case ".": {
-					if (display === "") setDisplay("0");
-					if (display.charAt(display.length - 1) === ".") {
-						break;
-					}
-					break;
-				}
-				default: {
-					setDisplay((currDisplay) => (currDisplay += e.target.innerText));
-				}
+	const [answer, setAnswer] = useState(false);
+	const [history, setHistory] = useState("");
+	const [input, setInput] = useState("0");
+
+	const handleCalc = (val) => {
+		let newHistory = history + " " + input + " " + val;
+		let result = "";
+		if (val === "CE") {
+			console.log("on the right track");
+			setInput("0");
+			setHistory("");
+			return;
+		}
+		if (val === "←") {
+			setInput((prevInput) => prevInput.slice(0, -1));
+			return;
+		}
+		if (val === "¹/x") {
+			newHistory = `1/${history + input}`;
+			result = calculateString(newHistory).substring(0, 14);
+			setHistory(newHistory);
+			setInput(result);
+			setAnswer(true);
+		}
+		if (val === "x²") {
+			if (operators.includes(history.slice(-1))) {
+				newHistory = `${history + input} * ${history + input} =`;
+				result = calculateString(newHistory).substring(0, 20);
+				setInput(result);
+				setHistory(newHistory);
+			} else {
+				newHistory = `${history + input} * ${history + input} =`;
+				result = calculateString(newHistory).substring(0, 20);
+				setInput(result);
+				setHistory(newHistory);
 			}
+			setAnswer(true);
+		}
+		if (basicOperators.includes(val)) {
+			if (operators.includes(newHistory.slice(-1))) {
+				setHistory(newHistory.slice(0, -1) + " " + val);
+				setInput("");
+				return;
+			} else {
+				setHistory(newHistory + val);
+				setInput("");
+				return;
+			}
+		}
+		if (val === "=") {
+			setAnswer(true);
+			const result = calculateString(newHistory);
+			setHistory(newHistory);
+			setInput(result);
+			return;
+		} else return console.log("not made yet");
+	};
+
+	const handleClick = (val) => {
+		if (!answer) {
+			const newInput = input + val;
+			if (input === undefined) {
+				setInput("0");
+				return;
+			}
+			if (operators.includes(val)) {
+				if (input === "0") return;
+				return handleCalc(val);
+			}
+			if (input === "0" && val === ".") return setInput("0.");
+			if (val === "." && input.includes(".")) return;
+			else {
+				console.log("add input val");
+				if (input === "0") return setInput(val);
+				return setInput(newInput);
+			}
+		} else {
+			if (operators.includes(val)) setInput("0");
+			else setInput(val);
+			setHistory("");
+			setAnswer(false);
+			return;
 		}
 	};
 
 	return (
 		<div className="app">
-			<h1>A simple calculator</h1>
 			<div className="container">
-				<div
-					className="display"
-					placeholder="."
-				><div>{calculations}</div>
-					<div>
-						{input}
-						</div>
+				<div className="display">
+					<div className="calc">{history}</div>
+					<div className="input">{input}</div>
 				</div>
 				<div className="buttons">
 					{buttonSymbols.map((b) => {
 						return (
 							<div
-								onClick={(e) => handleClick(e)}
-								className={`button ${b} ${b === "=" && "equals"}`}
+								onClick={(e) => handleClick(b.toString())}
+								className={`button ${b === "=" ? "equal" : b} `}
 								key={b}
 							>
 								{b}
@@ -118,6 +133,7 @@ function App() {
 					})}
 				</div>
 			</div>
+			<p>Developed by Sav Costabile</p>
 		</div>
 	);
 }
