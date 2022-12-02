@@ -1,6 +1,6 @@
 import calculateString from "calculate-string";
 import React, {useState} from "react";
-import "./style.css";
+import "./style.scss";
 
 const buttonSymbols = [
 	"CE",
@@ -28,9 +28,14 @@ const operators = ["/", "+", "-", "*", "CE", "x²", "¹/x", "←", "="];
 const basicOperators = operators.splice(0, 4);
 function App() {
 	const [answer, setAnswer] = useState(false);
-	const [history, setHistory] = useState("");
+	const [history, setHistory] = useState("2+2");
 	const [input, setInput] = useState("0");
 
+	const handleKey = (e) => {
+		console.log(e.code);
+		if (buttonSymbols.includes(e.code)) handleClick(e.code);
+		else return;
+	};
 	const handleCalc = (val) => {
 		let newHistory = history + " " + input + " " + val;
 		let result = "";
@@ -86,8 +91,9 @@ function App() {
 	};
 
 	const handleClick = (val) => {
+		const newInput = input + val;
+		const prevInput = input;
 		if (!answer) {
-			const newInput = input + val;
 			if (input === undefined) {
 				setInput("0");
 				return;
@@ -104,9 +110,9 @@ function App() {
 				return setInput(newInput);
 			}
 		} else {
-			if (operators.includes(val)) setInput("0");
+			if (operators.includes(val)) setInput(val);
 			else setInput(val);
-			setHistory("");
+			setHistory(prevInput);
 			setAnswer(false);
 			return;
 		}
@@ -125,6 +131,7 @@ function App() {
 							<div
 								onClick={(e) => handleClick(b.toString())}
 								className={`button ${b === "=" ? "equal" : b} `}
+								onKeyDown={(e) => handleKey(e)}
 								key={b}
 							>
 								{b}
