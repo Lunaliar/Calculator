@@ -28,7 +28,7 @@ const operators = ["/", "+", "-", "*", "CE", "x²", "¹/x", "←", "="];
 const basicOperators = operators.splice(0, 4);
 function App() {
 	const [answer, setAnswer] = useState(false);
-	const [history, setHistory] = useState("2+2");
+	const [history, setHistory] = useState("");
 	const [input, setInput] = useState("0");
 
 	const handleKey = (e) => {
@@ -140,7 +140,9 @@ function App() {
 					})}
 				</div>
 			</div>
-			<p>Developed by Sav Costabile</p>
+			<p>
+				Developed by <a href="https://savcodes.dev">Sav Costabile</a>
+			</p>
 		</div>
 	);
 }
