@@ -140,8 +140,8 @@ function App() {
 					})}
 				</div>
 			</div>
-			<p>
-				Developed by <a href="https://savcodes.dev">Sav Costabile</a>
+			<p className="credit">
+				<a href="https://savcodes.dev">Sav Costabile</a> © 2022
 			</p>
 		</div>
 	);
