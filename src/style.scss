@@ -1,99 +1,99 @@
 :root {
-	--navy: #1d3557;
-	--slate: #457b9d;
-	--lightblue: #a8dadc;
-	--white: #f1faee;
-	--red: #e63946;
+  --navy: #1d3557;
+  --slate: #457b9d;
+  --lightblue: #a8dadc;
+  --white: #f1faee;
+  --red: #e63946;
 }
 
 .app {
-	font-size: 1em;
-	min-height: 100vh;
-	background-color: var(--lightblue);
-	p {
-		font-size: 0.5rem;
-		margin: 0;
-		color: var(--navy);
-		a {
-			color: blue;
-		}
-	}
+  font-size: 1em;
+  min-height: 100vh;
+  background-color: var(--lightblue);
+  p {
+    font-size: 0.5rem;
+    margin: 0;
+    color: var(--navy);
+    a {
+      color: blue;
+    }
+  }
 }
 .container {
-	background-color: #1d3557;
-	display: flex;
-	flex-direction: column;
-	user-select: none;
+  background-color: #1d3557;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
 
-	.display {
-		background-color: var(--white);
-		text-align: end;
-		padding: 0.3rem;
-		.calc {
-			font-size: 1.5rem;
-			min-height: 4vh;
-			line-height: 4vh;
-			color: gray;
-			margin-bottom: 0.3rem;
-		}
-		.input {
-			line-height: 8vh;
-			font-size: 2.75rem;
-		}
-	}
-	.buttons {
-		padding: 0.5rem;
-		min-height: 75vh;
-		background-color: var(--lightblue);
-		display: grid;
-		grid-template-columns: repeat(4, auto);
-		grid-template-rows: repeat(5, auto);
-		gap: 0.5rem;
-		.button {
-			border-radius: 0.3rem;
-			font-size: 2.5rem;
-			font-weight: 700;
-			background-color: var(--slate);
-			color: var(--white);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.equal {
-			background-color: var(--red);
-			font-weight: 900;
-		}
-		.CE {
-			background-color: var(--white);
-			color: var(--slate);
-		}
-		.← {
-			background-color: var(--slate);
-			color: var(--red);
-		}
-	}
+  .display {
+    background-color: var(--white);
+    text-align: end;
+    padding: 0.3rem;
+    .calc {
+      font-size: 1.5rem;
+      min-height: 4vh;
+      line-height: 4vh;
+      color: gray;
+      margin-bottom: 0.3rem;
+    }
+    .input {
+      line-height: 8vh;
+      font-size: 2.75rem;
+    }
+  }
+  .buttons {
+    padding: 0.5rem;
+    min-height: 75vh;
+    background-color: var(--lightblue);
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(5, auto);
+    gap: 0.5rem;
+    .button {
+      border-radius: 0.3rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background-color: var(--slate);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .equal {
+      background-color: var(--red);
+      font-weight: 900;
+    }
+    .CE {
+      background-color: var(--white);
+      color: var(--slate);
+    }
+    .← {
+      background-color: var(--slate);
+      color: var(--red);
+    }
+  }
 }
 
 @media screen and (min-width: 43rem) {
-	.app {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		max-height: 80vh;
-		p {
-			font-size: 1rem;
-		}
-		.container {
-			border-radius: 0.5rem;
-			padding: 1.5rem;
-			min-width: 30rem;
-			max-height: 80vh;
-			.buttons {
-				padding-top: 1rem;
-				min-height: 55vh;
-				background: transparent;
-			}
-		}
-	}
+  .app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 80vh;
+    p {
+      font-size: 1rem;
+    }
+    .container {
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      min-width: 30rem;
+      max-height: 80vh;
+      .buttons {
+        padding-top: 1rem;
+        min-height: 55vh;
+        background: transparent;
+      }
+    }
+  }
 }
