@@ -1,6 +1,6 @@
 # Sav's Calculator
 
-This is a project I attempted back when I was first learning about JavaScript HTML and CSS. I really liked the problem that came with making a calculator but unfortunately I was stumped pretty early on and only recently decided to give it another shot. It was so much fun working on this, as soon as I thought I had it all figured out even more problems would arise. I have achieved a basic functionality but I haven't hit all of the edge cases for this yet but I'll get around to it eventually!
+This is a project I attempted back when I first learned about JavaScript, HTML, and CSS. I liked the problem with making a calculator, but unfortunately, I was stumped pretty early on and only recently decided to give it another shot. It was so much fun working on this, as soon as I thought I had it all figured out even more problems would arise. I have achieved a basic functionality but haven't hit all of the edge cases for this yet but I'll get around to it eventually!
 
 - To make my life easier I've used a package called Calculate-String to make basic functionality on this easier.
 - This app is responsive for most screen sizes, I pulled the color palette from Coolors.co (Fantastic site can't recommend it enough).
